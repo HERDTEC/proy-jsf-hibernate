@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+    </h:head>
+    <h:body> 
+        <ui:composition template="/plantillas/layout.xhtml">
+            <ui:define name="body">
+                <h:form id="formProfesor">
+                    <p:panelGrid columns="3" id="panel" 
+                                          styleClass="ui-panelgrid">
+                        <f:facet name="header">
+                            #{msjs.titulo_profesor_nuevo}
+                        </f:facet>
+                        <p:outputLabel for="nombre" value="#{msjs.form_nombre}"/>
+                        <p:inputText value="#{profesor.profesor.nombre}" 
+                                     required="true"
+                                     label="#{msjs.form_nombre}" 
+                                     id="nombre">
+                            <p:ajax update="msgNombre" event="blur" />
+                        </p:inputText>
+                        <p:message id="msgNombre" for="nombre"/>
+
+                        <p:outputLabel for="apellidoPaterno" 
+                                       value="#{msjs.form_apellido_paterno}"/>
+                        <p:inputText value="#{profesor.profesor.apellidoPaterno}" 
+                                     required="true"
+                                     label="#{msjs.form_apellido_paterno}"
+                                     id="apellidoPaterno">
+                            <p:ajax update="msgApellidoPaterno" event="blur" />
+                        </p:inputText>   
+                        <p:message id="msgApellidoPaterno" for="apellidoPaterno"/>
+                        
+                        <p:outputLabel for="apellidoMaterno" 
+                                       value="#{msjs.form_apellido_materno}"/>
+                         <p:inputText value="#{profesor.profesor.apellidoMaterno}" 
+                                     required="true"
+                                     label="#{msjs.form_apellido_materno}"
+                                     id="apellidoMaterno">
+                            <p:ajax update="msgApellidoMaterno" event="blur" />
+                        </p:inputText>   
+                        <p:message id="msgApellidoMaterno" for="apellidoMaterno"/>
+                        
+                        <p:outputLabel value="#{msjs.form_fecha_nacimiento}" 
+                                       for="fecNac"/>
+                        <p:calendar value="#{profesor.profesor.fechaNacimiento}"
+                                    label="#{msjs.form_fecha_nacimiento}"
+                                    required="true"  id="fecNac"
+                                    effect="fadeIn"  maxdate="today"
+                                    pattern="dd/MM/yyyy" readonlyInput="true">
+                        </p:calendar>    
+                        <p:message id="msgfecNac" for="fecNac"/>
+                        
+                        <p:outputLabel for="direccion" 
+                                       value="#{msjs.form_direccion}"/>
+                        <p:inputText value="#{profesor.profesor.direccion}" 
+                                     required="true"
+                                     label="#{msjs.form_direccion}" 
+                                     id="direccion">
+                        </p:inputText>
+                        <p:message id="msgDireccion" for="direccion"/>
+                        
+   
+                        <p:outputLabel for="referencia" 
+                                       value="#{msjs.form_referencia}"/>
+                        <p:inputTextarea value="#{profesor.profesor.referencia}"
+                                     label="#{msjs.form_referencia}" 
+                                     id="referencia">
+                        </p:inputTextarea>
+                        <p:message id="msgReferencia" for="referencia"/>
+                       
+                        <p:outputLabel for="genero" 
+                                       value="#{msjs.form_genero}"/>
+                        <p:selectOneRadio value="#{profesor.profesor.genero}"
+                                          styleClass="selectOneRadioColumn"
+                                          id="genero"
+                                          required="true"
+                                          layout="pageDirection">
+                            <f:selectItems value="#{listados.generos}"/>
+                        </p:selectOneRadio>
+                        <p:message id="msgGenero" for="genero"/>
+                        
+                        <p:outputLabel for="estado" 
+                                       value="#{msjs.form_estado}" 
+                                       rendered="#{profesor.profesor.codigo!=null}"/>
+                        <p:selectOneRadio value="#{profesor.profesor.estado}"
+                                          styleClass="selectOneRadioColumn"
+                                          id="estado"
+                                          required="true"
+                                          layout="pageDirection"
+                                          rendered="#{profesor.profesor.codigo!=null}">
+                            <f:selectItems value="#{listados.estados}"/>
+                        </p:selectOneRadio>
+                        <p:message id="msgEstado" 
+                                   for="estado" 
+                                   rendered="#{profesor.profesor.codigo!=null}"/>
+                        
+                        <f:facet name="footer">
+                            <p:commandButton value="#{msjs.form_boton_registrar}" 
+                                             action="#{profesor.registrar}"
+                                             update="@form"
+                                             ajax="false"
+                                            />
+                            <p:commandButton value="#{msjs.form_boton_limpiar}" 
+                                             update="panel" 
+                                             process="@this"  >
+                                <p:resetInput target="panel" />
+                            </p:commandButton>
+                            <p:commandButton  action="listado"
+                                             value="#{msjs.form_boton_regresar}"
+                                             process="@this"
+                                             immediate="true"
+                                             ajax="false"/>
+                        </f:facet>
+                    </p:panelGrid>                        
+                </h:form>
+               
+            </ui:define>
+        </ui:composition>  
+    </h:body>
+</html>
+

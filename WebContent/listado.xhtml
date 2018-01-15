@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        
+    </h:head>
+    <h:body>
+          <ui:composition template="/plantillas/layout.xhtml">
+                <ui:define name="body">
+                    
+                    <p:panelGrid columns="1" id="panel" 
+                                          styleClass="ui-panelgrid">
+                        <h:outputText value="#{msjs.titulo_profesor_mantenimiento}"/>
+                        <h:form prependId="false">
+                            <p:commandButton action="#{profesor.buscar}" 
+                                             value="#{msjs.form_boton_buscar}"
+                                             update="profesores"/>
+                            <p:commandButton action="#{profesor.nuevo}" 
+                                             value="#{msjs.form_boton_nuevo}"
+                                             ajax="false"/>
+                            <p:separator/>
+                            <p:dataTable id="profesores" 
+                                        var="profe" 
+                                        value="#{profesor.profesores}" 
+                                        rowKey="#{profe.codigo}">
+                               <f:facet name="header">
+                                   Principales Datos
+                               </f:facet>
+
+                               <p:column headerText="#{msjs.form_codigo}">
+                                  #{profe.codigo}
+                               </p:column>
+                               <p:column headerText="#{msjs.form_nombre_completo}">
+                                   #{profe.apellidoPaterno}
+                                   #{profe.apellidoMaterno}
+                                   #{profe.nombre}
+                               </p:column>
+                               <p:column headerText="#{msjs.form_direccion}">
+                                   #{profe.direccion}
+                               </p:column>  
+                                <p:column>
+                                    <h:commandLink action="#{profesor.buscarPK}" 
+                                                     value="#{msjs.form_boton_actualizar}">
+                                        <f:param name="codigo" value="#{profe.codigo}"/>
+                                    </h:commandLink>
+                                 </p:column>  
+                                <p:column>
+                                    <h:commandLink action="#{profesor.eliminar}" 
+                                                     value="#{msjs.form_boton_eliminar}">
+                                        <f:param name="codigo" value="#{profe.codigo}"/>
+                                    </h:commandLink>
+                                </p:column>
+                           </p:dataTable>
+                           
+                        </h:form>
+                    </p:panelGrid>
+            
+                </ui:define>
+          </ui:composition>
+    </h:body>
+</html>
+

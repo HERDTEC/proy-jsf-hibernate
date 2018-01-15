@@ -1,0 +1,37 @@
+body {
+    background-color: gray;
+}
+
+#contenedor {
+    border-style:groove;
+    background-color: white;
+    width: 900px;
+    margin: 0em auto;
+}
+
+#cabecera {
+    border-bottom: solid
+}
+
+#menu {
+    float: left;
+    width: 200px;
+}
+
+#contenido {
+    float: left;
+    width: 700px;
+}
+
+#pie {
+     border-top: solid;
+    clear: both;
+}
+
+.selectOneRadioColumn td {
+border: none !important;
+}
+
+.ui-panelgrid tr, .ui-panelgrid td {
+border:none !important;
+}
